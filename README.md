@@ -20,8 +20,9 @@ INDEX
 Content of the repository
 ---------------------------------
 - SurfsUp directory:
-    - climate_starter.ipynb file
-    - app.py file
+    - climate_LMVSFinal.ipynb file <-- This is the Analysis file I worked on.
+    - climate_starter.ipynb file <-- This file is the starter code for the Analysis. It's blank
+    - app.py file <-- This is the Flask file
     - Resources directory:
       - hawaii.sqlite
       - hawaii_measurements.csv
