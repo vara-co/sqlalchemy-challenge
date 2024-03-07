@@ -1,12 +1,10 @@
-DU - DA Module 10
---------------------------------
---------------------------------
-SQLAlchemy Challenge (Using SQLite and Flask)
---------------------------------
---------------------------------
-by Laura Vara
---------------------------------
-NOTE: To use the Flask file, you need to load it on a program like Python. Then you need to run the code as is, and then type your program to run it. Something like 'python file.py' just change the name of the file to my actual flask file. After it runs, it will show a link on the terminal, and that's the link to the app routes. I tested it twice, and it is up and running. You will need to have SQLAlchemy and SQLite installed in your Anaconda Virtual Environment to be able to see, work, and run these files.
+<h1>SURF'S UP CLIMATE ANALYSIS AND APP<br/></h1>
+<h2>DU - DA Module 10 - SQLAlchemy Challenge (Using SQLite and Flask)<br/></h2>
+by Laura Vara<br/>
+<br/>
+
+![ClimateAppWelcomePg](https://github.com/vara-co/sqlalchemy-challenge/assets/152572519/6bf2d664-2baf-4298-afc3-d00c4d999447)
+* NOTE: To use the Flask file, you need to load it on a program like Python. Then you need to run the code as is, and then type your program to run it. Something like 'python file.py' just change the name of the file to my actual flask file. After it runs, it will show a link on the terminal, and that's the link to the app routes. I tested it twice, and it is up and running. You will need to have SQLAlchemy and SQLite installed in your Anaconda Virtual Environment to be able to see, work, and run these files.
 
 ---------------------------------
 INDEX
