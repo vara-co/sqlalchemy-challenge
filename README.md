@@ -86,3 +86,11 @@ Now that you’ve completed your initial analysis, you’ll design a Flask API b
 - Join the station and measurement tables for some of the queries.
 - Use the Flask jsonify function to convert your API data to a valid JSON response object.
 ----------------------------------------
+References
+----------------------------------------
+
+- Flask's main site: https://flask.palletsprojects.com/en/3.0.x/
+- For errors: https://flask.palletsprojects.com/en/3.0.x/quickstart/
+- Quick Reference: https://python.plainenglish.io/python-flask-quick-reference-12e782b101ff 
+- Other Flask references: https://www.numericalexpert.com/blog/flask_refs/
+
