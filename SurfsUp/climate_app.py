@@ -40,17 +40,24 @@ app = Flask(__name__)
 #################################################
 # Define the basic index by using the app.route() method
 @app.route("/")
-
-
 def welcome():
     """List all available api routes."""
-    return(
-        f"Available Routes:<br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end>"
+    return (
+        "<h2>Available Routes for the 'hawaii.sqlite' Dataset created with Flask:</h2><br/>"
+        "<h3>List of Precipitation Analysis Results for the last 12 months:</h3><br/>"
+        f"/api/v1.0/precipitation<br/><br/>"
+        "<h3>List of stations from the dataset hawaii.sqlite:</h3><br/>"
+        f"/api/v1.0/stations<br/><br/>"
+        "<h3>Dates and temperature observations of the most active station, for last 12 months:</h3><br/>"
+        f"/api/v1.0/tobs<br/><br/>"
+        "<h3>List of min/max/avr temps for a specified start range:</h3><br/>"
+        f"Be sure to follow this format: http://127.0.0.1:5000/api/v1.0/2017-06-23<br/>"
+        f"YYYY-MM-DD for the start date. The last date in the database will show automatically.<br/>"
+        f"/api/v1.0/&lt;start&gt;<br/><br/>"
+        "<h3>List of min/max/avr temps for a specified start-end range:</h3><br/>"
+        f"Be sure to follow this format: http://127.0.0.1:5000/api/v1.0/2017-06-30/2017-07-03<br/>"
+        f"YYYY-MM-DD for both start and end dates<br/>"
+        f"/api/v1.0/&lt;start&gt;/&lt;end&gt;"
     )
 
 # Define the 'precipitation' endpoint
@@ -85,7 +92,7 @@ def precipitation():
 
     # Return the JSON representation of the dictionary
     # return jsonify(precipitation_dict)
-    return jsonify({"Date and Precipitation for 1 year": precipitation_dict})
+    return jsonify({"Date and Precipitation for 1 year prior to last date in database": precipitation_dict})
 
 
 # Define the 'stations' endpoint and return a JSON list of stations from the dataset.
@@ -116,7 +123,7 @@ def stations():
 
     # Return the JSON representation of the dictionary
     # return jsonify(all_stations_list)
-    return jsonify({"List of Stations": all_stations_list})
+    return jsonify({"List of Stations in Hawaii for this Database": all_stations_list})
 
 # Define the 'tobs' endpoint
 @app.route("/api/v1.0/tobs")
@@ -157,27 +164,83 @@ def tobs():
 
     # Return the JSON list of tobs for the previous year
     # return jsonify(tobs_list)
-    return jsonify({"Most Active Station": most_active_station_id, "tobs for previous year": tobs_list})
+    return jsonify({"Most Active Station": most_active_station_id, "tobs for 1 year prior to the last date in Database": tobs_list})
 
 # Define the 'start' endpoint
 @app.route("/api/v1.0/<start>")
 
 
-def date_range(start):
+def start_date(start):
     # Create session link from Python to the DB of this app route
     session_var = Session(engine)
+    """Return a list of TMIN, TMAX, and TAVG from Start Date to end of Dataset"""
 
+    # Find the last date in the database
+    most_recent_date = session_var.query(Measurement.date).order_by(Measurement.date.desc()).first()[0]
+
+    tobs_start_date = (
+        session_var.query(
+            func.min(Measurement.tobs),
+            func.max(Measurement.tobs),
+            func.avg(Measurement.tobs)
+        )
+        .filter(Measurement.date >= start)
+        .filter(Measurement.date <= most_recent_date)
+        .group_by(Measurement.date).all())
+
+    # Close the session
     session_var.close()
 
-# Define the 'start' endpoint
+    # Create Dictionary with query
+    tobs_start_list = []
+    for min, max, avg in tobs_start_date:
+        tobs_start_dict = {}
+        tobs_start_dict["TMIN"] = min
+        tobs_start_dict["TMAX"] = max
+        tobs_start_dict["TAVG"] = avg
+        tobs_start_list.append(tobs_start_dict)
+
+    # Return JSON response
+    return jsonify({"Avg/Max/Min Temps from YYYY-MM-DD Entered until the end of the Dataset": tobs_start_list})
+
+# Define the 'start' to 'end' endpoint
 @app.route("/api/v1.0/<start>/<end>")
 
 
-def date_range_with_end(start, end):
+def start_end_date(start, end):
     # Create session link from Python to the DB of this app route
     session_var = Session(engine)
+    """Return a list of TMIN, TMAX, and TAVG from Start Date to End Date"""
 
+    # Find the last date in the database
+    most_recent_date = session_var.query(Measurement.date).order_by(Measurement.date.desc()).first()[0]
+
+    tobs_startend_date = (
+        session_var.query(
+            func.min(Measurement.tobs),
+            func.max(Measurement.tobs),
+            func.avg(Measurement.tobs)
+        )
+        .filter(Measurement.date >= start)
+        .filter(Measurement.date <= end)
+        .filter(Measurement.date <= most_recent_date)
+        .group_by(Measurement.date).all())
+
+    # Close the session
     session_var.close()
+
+    # Create Dictionary with query
+    tobs_startend_list = []
+    for min, max, avg in tobs_startend_date:
+        tobs_startend_dict = {}
+        tobs_startend_dict["TMIN"] = min
+        tobs_startend_dict["TMAX"] = max
+        tobs_startend_dict["TAVG"] = avg
+        tobs_startend_list.append(tobs_startend_dict)
+
+    # Return JSON response
+    return jsonify({"Avg/Max/Min Temps from Start Date(YYYY-MM-DD) - End Date(YYYY-MM-DD)": tobs_startend_list})
+
 
 # Close the first session
 session_var.close()
