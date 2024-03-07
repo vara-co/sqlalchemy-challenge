@@ -7,7 +7,7 @@ SQLAlchemy Challenge (Using SQLite and Flask)
 --------------------------------
 by Laura Vara
 --------------------------------
-NOTE: 
+NOTE: To use the Flask file, you need to load it on a program like Python. Then you need to run the code as is, and then type your program to run it. Something like 'python file.py' just change the name of the file to my actual flask file. After it runs, it will show a link on the terminal, and that's the link to the app routes. I tested it twice, and it is up and running. You will need to have SQLAlchemy and SQLite installed in your Anaconda Virtual Environment to be able to see, work, and run these files.
 
 ---------------------------------
 INDEX
@@ -21,10 +21,10 @@ Content of the repository
 ---------------------------------
 - SurfsUp directory:
     - climate_LMVSFinal.ipynb file <-- This is the Analysis file I worked on.
-    - climate_starter.ipynb file <-- This file is the starter code for the Analysis. It's blank
-    - climate_app.py file <-- This is the Flask file with my code for these queries
+    - climate_starter.ipynb file <-- This file is the starter code for the Analysis. It's blank.
+    - climate_app.py file <-- This is the Flask app, created via python, with my code for these queries. With the right packages installed, and dependencies imported, it works perfectly well.
     - Resources directory:
-      - hawaii.sqlite
+      - hawaii.sqlite  <-- this file cannot be opened via Jupyter Notebook. Instead try drag and drop to this site https://sqliteviewer.app/
       - hawaii_measurements.csv
       - hawaii_stations.csv
     - output_data directory:
