@@ -6,6 +6,25 @@ by Laura Vara<br/>
 ![ClimateAppWelcomePg](https://github.com/vara-co/sqlalchemy-challenge/assets/152572519/6bf2d664-2baf-4298-afc3-d00c4d999447)
 * NOTE: To use the Flask file, you need to load it on a program like Python. Then you need to run the code as is, and then type your program to run it. Something like 'python file.py' just change the name of the file to my actual flask file. After it runs, it will show a link on the terminal, and that's the link to the app routes. I tested it twice, and it is up and running. You will need to have SQLAlchemy and SQLite installed in your Anaconda Virtual Environment to be able to see, work, and run these files.
 
+**RUNNING THE FLASK APP**
+To run Flask apps in your computer:
+1. Make sure you have PyCharm
+2. Make sure you have the following installed for this particular project:
+	1. In PyCharm, go to File > Settings > Project:Desktop > Python Interpreter
+	2. Type each of the following packages and install each one:
+		• Flask
+		• Numpy
+		• SQLAlchemy
+3. Run the code on PyCharm
+4. Type in the terminal, still in PyCharm: climate_app.py  (Then hit enter.)
+5. The terminal will give you a development server that says
+	Running on http://000.0.0.1:0000 <-- It will give you a linked server location
+6. Click on that server link and it will take you to the Flask application for use.
+It should look something like this:
+![Readmeimage](https://github.com/vara-co/sqlalchemy-challenge/assets/152572519/e84a71f1-e0a8-4b39-aeb0-275ae6955171)
+
+7. Then follow the instructions on that page to make your JSON queries. 
+
 ---------------------------------
 INDEX
 ---------------------------------
